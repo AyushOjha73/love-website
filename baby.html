@@ -1,53 +1,242 @@
-
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Happy Girlfriend's Day</title>
+
 <style>
-body{margin:0;font-family:Arial;background:linear-gradient(135deg,#ff9ec4,#ffeaf4);overflow:hidden}
-.container{max-width:900px;margin:30px auto;background:rgba(255,255,255,.3);backdrop-filter:blur(10px);padding:25px;border-radius:20px;text-align:center;position:relative}
-.hidden{display:none}button{padding:12px 24px;border-radius:30px;border:none;margin:10px;font-size:18px}
-#yesBtn,#yesBtn2{background:#ff4d88;color:#fff}#noBtn,#noBtn2{position:absolute}
-.heart,.petal{position:fixed;pointer-events:none;animation:fall linear infinite}
-@keyframes fall{from{transform:translateY(-10vh)}to{transform:translateY(110vh)}}
-#slide{width:220px;height:220px;object-fit:cover;border-radius:16px}
-#bouquet{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);font-size:90px;display:none}
-.blast{position:fixed;left:50%;top:50%;font-size:28px;animation:boom 2s forwards}
-@keyframes boom{to{transform:translate(var(--x),var(--y)) scale(2);opacity:0}}
-.finalmsg{font-size:34px;color:#d1005a;text-shadow:0 0 10px pink}
-</style></head><body>
-<audio id=bg loop><source src="music.mp3" type="audio/mpeg"></audio>
-<div class=container>
-<img id=slide src="images/photo1.jpg">
-<div id=page1><h1>💖 Happy Girlfriend's Day 💖</h1><p id=typing></p><h2>Do you love me?</h2><button id=yesBtn>Yes ❤️</button><button id=noBtn>No 😶</button></div>
-<div id=page2 class=hidden><h2>Will you forgive me?</h2><button id=yesBtn2>Yes 💖</button><button id=noBtn2>No 🙈</button></div>
-<div id=page3 class="hidden"><h1>❤️ Thank You ❤️</h1><p>You make my world complete.</p><div class=finalmsg>💍 Forever Yours ❤️</div></div>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#ff9ec4,#ffeaf4);
+    overflow:hidden;
+}
+.container{
+    max-width:900px;
+    margin:30px auto;
+    background:rgba(255,255,255,.3);
+    backdrop-filter:blur(10px);
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    position:relative;
+}
+.hidden{display:none;}
+button{
+    padding:12px 24px;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    margin:10px;
+    cursor:pointer;
+}
+#yesBtn,#yesBtn2{
+    background:#ff4d88;
+    color:#fff;
+}
+#noBtn,#noBtn2{
+    position:absolute;
+}
+#slide{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:15px;
+}
+.heart,.petal{
+    position:fixed;
+    pointer-events:none;
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    from{transform:translateY(-10vh);}
+    to{transform:translateY(110vh);}
+}
+#bouquet{
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:90px;
+    display:none;
+}
+.blast{
+    position:fixed;
+    left:50%;
+    top:50%;
+    font-size:28px;
+    animation:boom 2s forwards;
+}
+@keyframes boom{
+    to{
+        transform:translate(var(--x),var(--y)) scale(2);
+        opacity:0;
+    }
+}
+.finalmsg{
+    font-size:34px;
+    color:#d1005a;
+    text-shadow:0 0 10px pink;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<img id="slide" src="photo1.jpg">
+
+<div id="page1">
+<h1>💖 Happy Girlfriend's Day 💖</h1>
+
+<p id="typing"></p>
+
+<h2>Do you love me?</h2>
+
+<button id="yesBtn">Yes ❤️</button>
+<button id="noBtn">No 😶</button>
+
 </div>
-<div id=bouquet>💐🌹💐</div>
+
+<div id="page2" class="hidden">
+
+<h2>Will you forgive me?</h2>
+
+<button id="yesBtn2">Yes 💖</button>
+<button id="noBtn2">No 🙈</button>
+
+</div>
+
+<div id="page3" class="hidden">
+
+<h1>❤️ Thank You ❤️</h1>
+
+<p>You make my world complete.</p>
+
+<div class="finalmsg">
+💍 Forever Yours ❤️
+</div>
+
+</div>
+
+</div>
+
+<div id="bouquet">💐🌹💐</div>
+
 <script>
-const photos = [
-    "images/photo1.jpg",
-    "images/photo2.jpg",
-    "images/photo3.jpg",
-    "images/photo4.jpg",
-    "images/photo5.jpg",
+
+const txt=`My Love,
+
+Before I say anything else, I want to sincerely apologize for every mistake I've ever made.
+
+I'm sorry for every moment I hurt you.
+
+Thank you for staying beside me.
+
+I promise to become a better person every day.
+
+❤️`;
+
+let i=0;
+
+function type(){
+    if(i<txt.length){
+        typing.innerHTML+=txt[i++].replace("\n","<br>");
+        setTimeout(type,35);
+    }
+}
+
+type();
+
+let ph=[
+"photo1.jpg",
+"photo2.jpg",
+"photo3.jpg",
+"photo4.jpg",
+"photo5.jpg"
+];
+
+let c=0;
+
+setInterval(()=>{
+    c=(c+1)%ph.length;
+    slide.src=ph[c];
+},3000);
+
+function deco(){
+    for(let i=0;i<40;i++){
+        let d=document.createElement("div");
+        d.className=Math.random()>.5?"heart":"petal";
+        d.innerHTML=Math.random()>.5?"❤️":"🌹";
+        d.style.left=Math.random()*100+"vw";
+        d.style.animationDuration=4+Math.random()*5+"s";
+        document.body.appendChild(d);
+    }
+}
+
+deco();
+
+function move(btn){
+    btn.style.left=Math.random()*(innerWidth-120)+"px";
+    btn.style.top=Math.random()*(innerHeight-60)+"px";
+}
+
+setInterval(()=>{
+    move(noBtn);
+    move(noBtn2);
+},700);
+
+["mouseover","click","touchstart"].forEach(e=>{
+    noBtn.addEventListener(e,x=>{
+        x.preventDefault();
+        move(noBtn);
+    });
+
+    noBtn2.addEventListener(e,x=>{
+        x.preventDefault();
+        move(noBtn2);
+    });
+});
+
+yesBtn.onclick=()=>{
+    bouquet.style.display="block";
+
+    setTimeout(()=>{
+        bouquet.style.display="none";
+    },1800);
+
+    page1.classList.add("hidden");
+    page2.classList.remove("hidden");
+};
+
+function explode(){
+    for(let i=0;i<80;i++){
+        let h=document.createElement("div");
+        h.className="blast";
+        h.innerHTML="💖";
+        h.style.setProperty("--x",(Math.random()*800-400)+"px");
+        h.style.setProperty("--y",(Math.random()*800-400)+"px");
+        document.body.appendChild(h);
+
+        setTimeout(()=>{
+            h.remove();
+        },2000);
+    }
+}
+
+yesBtn2.onclick=()=>{
+    page2.classList.add("hidden");
+    page3.classList.remove("hidden");
+    explode();
+    alert("💍 You make my world complete ❤️");
+};
+
+</script>
+
+</body>
+</html>
+
    
     
-];
-document.body.addEventListener("click",()=>bg.play(),{once:true});
-const txt=`My Love,
-Before I say anything else, I want to sincerely apologize for every mistake I've ever made.
-I'm sorry for every moment I hurt you.
-Thank you for staying beside me.
-I promise to become a better person every day.
-❤️`;
-let i=0;function type(){if(i<txt.length){typing.innerHTML+=txt[i++].replace("\n","<br>");setTimeout(type,35)}}type();
-let ph=["images/photo1.jpg","images/photo2.jpg","images/photo3.jpg","images/photo4.jpg"],c=0;
-setInterval(()=>{c=(c+1)%ph.length;slide.src=ph[c]},3000);
-function deco(){for(let i=0;i<40;i++){let d=document.createElement("div");d.className=Math.random()>.5?"heart":"petal";d.innerHTML=Math.random()>.5?"❤️":"🌹";d.style.left=Math.random()*100+"vw";d.style.animationDuration=4+Math.random()*5+"s";document.body.appendChild(d);}}
-deco();
-function move(b){b.style.left=Math.random()*(innerWidth-120)+"px";b.style.top=Math.random()*(innerHeight-60)+"px";}
-setInterval(()=>{move(noBtn);move(noBtn2)},700);
-["mouseover","click","touchstart"].forEach(e=>{noBtn.addEventListener(e,x=>{x.preventDefault();move(noBtn)});noBtn2.addEventListener(e,x=>{x.preventDefault();move(noBtn2)});});
-yesBtn.onclick=()=>{bouquet.style.display="block";setTimeout(()=>bouquet.style.display="none",1800);page1.classList.add("hidden");page2.classList.remove("hidden");};
-function explode(){for(let i=0;i<80;i++){let h=document.createElement("div");h.className="blast";h.innerHTML="💖";h.style.setProperty("--x",(Math.random()*800-400)+"px");h.style.setProperty("--y",(Math.random()*800-400)+"px");document.body.appendChild(h);setTimeout(()=>h.remove(),2000);}}
-yesBtn2.onclick=()=>{page2.classList.add("hidden");page3.classList.remove("hidden");explode();alert("💍 You make my world complete ❤️");};
-</script></body></html>

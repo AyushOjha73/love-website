@@ -124,6 +124,9 @@ button{
 </div>
 
 <div id="bouquet">💐🌹💐</div>
+<audio id="bgMusic" loop>
+    <source src="music/love.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 
@@ -232,11 +235,19 @@ yesBtn2.onclick=()=>{
     explode();
     alert("💍 You make my world complete ❤️");
 };
+const music = document.getElementById("bgMusic");
+
+function startMusic() {
+    music.volume = 0.5;
+    music.play().catch(() => {});
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("touchstart", startMusic);
+}
+
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
 
 </script>
 
 </body>
 </html>
-
-   
-    
